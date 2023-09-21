@@ -6,10 +6,12 @@ class WeatherCard extends StatelessWidget {
     super.key,
     required this.weatherModel,
     required this.iconURL,
+    required this.onPressed,
   });
 
   final WeatherModel? weatherModel;
   final String? iconURL;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -21,43 +23,56 @@ class WeatherCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${weatherModel?.location.name} / ${weatherModel?.location.country}' ??
-                  'City not selected',
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              '${weatherModel?.location.localtime}',
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.network(iconURL!),
-                Column(
+                Text(
+                  '${weatherModel?.location.name} / ${weatherModel?.location.country}' ??
+                      'City not selected',
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${weatherModel?.location.localtime}',
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                Row(
                   children: [
-                    Text(
-                      '${weatherModel?.current.tempC} c',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 32.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '${weatherModel?.current.tempF} f',
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 32.0,
-                          fontWeight: FontWeight.bold),
+                    Image.network(iconURL!),
+                    Column(
+                      children: [
+                        Text(
+                          '${weatherModel?.current.tempC} c',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 32.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${weatherModel?.current.tempF} f',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 32.0,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
                     )
                   ],
                 )
               ],
-            )
+            ),
+            const Spacer(),
+            IconButton(
+                onPressed: onPressed,
+                icon: const Icon(
+                  Icons.refresh,
+                  color: Colors.white,
+                  size: 32,
+                ))
           ],
         ),
       ),
