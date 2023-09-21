@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_task/UI/data.dart';
+import 'package:test_task/UI/screens/weather_screen.dart';
+import 'package:test_task/UI/widgets/app_button.dart';
 import 'package:test_task/UI/widgets/form_widget.dart';
 
 class CalculatorScreen extends StatefulWidget {
@@ -75,6 +77,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 'Result: ${result.toDouble()}',
                 style: const TextStyle(color: Colors.white, fontSize: 18.0),
               ),
+              const Spacer(),
+              AppButton(
+                  title: 'Next',
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const WeatherScreen())))
             ],
           ),
         ),
